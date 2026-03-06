@@ -1,19 +1,18 @@
 """
-Face Type Colors — Addon para Blender 5.0+
-============================================
-Muestra colores diferentes para Tris, Quads y Ngons en Edit Mode.
-Overlay configurable con colores y opacidad personalizables.
+TopoLens — Blender 5.0+ Addon
+==============================
+GPU overlay that highlights Tris, Quads, and Ngons with different colors in Edit Mode.
 
-Panel en: View3D > Sidebar (N) > pestaña "Topo Colors"
+Panel at: View3D > Sidebar (N) > TopoLens
 """
 
 bl_info = {
-    "name": "Face Type Colors",
+    "name": "TopoLens",
     "author": "JordanRO2",
-    "version": (1, 0, 0),
+    "version": (1, 1, 0),
     "blender": (5, 0, 0),
-    "location": "View3D > Sidebar > Topo Colors",
-    "description": "Colorea Tris, Quads y Ngons con colores diferentes en Edit Mode",
+    "location": "View3D > Sidebar > TopoLens",
+    "description": "GPU overlay to visualize Tris, Quads, and Ngons in Edit Mode",
     "category": "Mesh",
 }
 

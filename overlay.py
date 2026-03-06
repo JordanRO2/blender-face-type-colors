@@ -1,5 +1,5 @@
 """
-Face Type Colors — GPU overlay for Tris, Quads, and Ngons.
+TopoLens — GPU overlay for Tris, Quads, and Ngons.
 Z-fighting fixed by offsetting vertices along face normals.
 """
 
@@ -18,7 +18,7 @@ from bpy.props import (
 # Properties
 # ---------------------------------------------------------------------------
 
-class FaceTypeColorsProperties(bpy.types.PropertyGroup):
+class TopoLensProperties(bpy.types.PropertyGroup):
     enabled: BoolProperty(
         name="Enable",
         description="Toggle face type color overlay",
@@ -96,7 +96,7 @@ def _draw_callback(context):
     if context.mode != 'EDIT_MESH':
         return
 
-    props = context.scene.face_type_colors
+    props = context.scene.topolens
     me = obj.data
     bm = bmesh.from_edit_mesh(me)
     bm.faces.ensure_lookup_table()
@@ -204,16 +204,16 @@ def _stop_timer():
 # Panel
 # ---------------------------------------------------------------------------
 
-class VIEW3D_PT_face_type_colors(bpy.types.Panel):
-    bl_label = "Face Type Colors"
-    bl_idname = "VIEW3D_PT_face_type_colors"
+class VIEW3D_PT_topolens(bpy.types.Panel):
+    bl_label = "TopoLens"
+    bl_idname = "VIEW3D_PT_topolens"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
-    bl_category = "Topo Colors"
+    bl_category = "TopoLens"
 
     def draw(self, context):
         layout = self.layout
-        props = context.scene.face_type_colors
+        props = context.scene.topolens
 
         row = layout.row()
         row.scale_y = 1.5
@@ -270,15 +270,15 @@ class VIEW3D_PT_face_type_colors(bpy.types.Panel):
 # ---------------------------------------------------------------------------
 
 classes = (
-    FaceTypeColorsProperties,
-    VIEW3D_PT_face_type_colors,
+    TopoLensProperties,
+    VIEW3D_PT_topolens,
 )
 
 
 def register():
     for cls in classes:
         bpy.utils.register_class(cls)
-    bpy.types.Scene.face_type_colors = bpy.props.PointerProperty(type=FaceTypeColorsProperties)
+    bpy.types.Scene.topolens = bpy.props.PointerProperty(type=TopoLensProperties)
     _start_timer()
 
 
@@ -288,6 +288,6 @@ def unregister():
     if _draw_handle is not None:
         bpy.types.SpaceView3D.draw_handler_remove(_draw_handle, 'WINDOW')
         _draw_handle = None
-    del bpy.types.Scene.face_type_colors
+    del bpy.types.Scene.topolens
     for cls in reversed(classes):
         bpy.utils.unregister_class(cls)
